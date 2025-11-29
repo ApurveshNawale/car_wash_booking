@@ -2,274 +2,525 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Doorstep Car Wash</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroClean - Mobile Car Wash Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* GLOBAL STYLES & RESET */
+        :root {
+            --primary-blue: #007bff;
+            --primary-blue-dark: #0056b3;
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --background-light: #ffffff;
+            --section-padding: 80px 0;
+            --box-shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f7f8fb;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f4f7f9;
+        }
 
-    .hero {
-      background: url('/mnt/data/c4f5c535-f7d1-414d-84e2-a8ba8be64286.png') center/cover no-repeat;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+        a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            transition: color 0.3s;
+        }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(3, 10, 18, 0.55), rgba(3, 10, 18, 0.85));
-    }
+        a:hover {
+            color: var(--primary-blue-dark);
+        }
 
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1100px;
-      padding: 48px 18px;
-      color: #fff;
-      text-align: center;
-    }
+        .centered-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    .booking-panel {
-      margin-top: 22px;
-    }
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 10px;
+        }
 
-    .booking-card {
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 8px 30px rgba(2, 8, 15, 0.22);
-      background: #fff;
-      color: #111;
-    }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-blue);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
 
-    .floating-bubble {
-      display: inline-block;
-      margin-top: 18px;
-      background: #fff;
-      padding: 8px 14px;
-      border-radius: 999px;
-      box-shadow: 0 8px 30px rgba(2, 8, 15, 0.25);
-      color: #0aa0dc;
-      font-weight: 700;
-    }
+        .white-text {
+            color: var(--text-light);
+        }
 
-    .service-card {
-      border-radius: 12px;
-      transition: all .22s;
-    }
+        .primary-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+        }
 
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(2, 8, 15, 0.08);
-    }
+        .primary-btn:hover {
+            background-color: var(--primary-blue-dark);
+            transform: translateY(-2px);
+        }
 
-    @media (max-width:900px) {
-      .hero-inner h1 {
-        font-size: 28px
-      }
+        /* HERO SECTION STYLES */
+        .hero-section {
+            position: relative;
+            min-height: 700px;
+            /* background: url('car-wash-background.jpg') center center / cover no-repeat; */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 80px;
+            color: var(--text-light);
+        }
 
-      .booking-card .row>* {
-        min-width: 100%
-      }
-    }
-  </style>
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .hero-section>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: white;
+        }
+
+        .main-nav a {
+            color: white;
+            margin-left: 25px;
+            font-weight: 400;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .main-nav a:hover:after {
+            width: 100%;
+        }
+
+        .hero-content {
+            text-align: center;
+            padding: 0 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .hero-heading {
+            font-size: 3.8em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero-subtext {
+            font-size: 1.4em;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        /* Booking Bar */
+        .booking-bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .booking-bar {
+            display: flex;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            align-items: center;
+        }
+
+        .booking-input {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            padding: 0 15px;
+            border-right: 1px solid #eee;
+        }
+
+        .booking-input:last-of-type {
+            border-right: none;
+        }
+
+        .booking-input i {
+            color: var(--primary-blue);
+            margin-right: 10px;
+        }
+
+        .booking-input input,
+        .booking-input select {
+            border: none;
+            padding: 15px 0;
+            width: 100%;
+            font-size: 1em;
+            color: var(--text-dark);
+            outline: none;
+            background: transparent;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .search-btn {
+            display: none;
+        }
+
+        .book-now-btn {
+            padding: 15px 50px;
+            border-radius: var(--border-radius);
+            font-size: 1.2em;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* Message Box for Confirmation/Error */
+        #form-message {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            opacity: 0;
+            /* Initially hidden */
+            transition: opacity 0.5s ease;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            opacity: 1 !important;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            opacity: 1 !important;
+        }
+
+        /* OTHER SECTION STYLES (Condensed for brevity) */
+        .about-section,
+        .services-section,
+        .reviews-section,
+        .footer-section {
+            padding: var(--section-padding);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-box {
+            background: var(--background-light);
+            padding: 40px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-subtle);
+        }
+
+        .service-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--background-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-subtle);
+        }
+
+        .reviews-section {
+            background-color: var(--primary-blue-dark);
+            text-align: center;
+        }
+
+        .review-card {
+            background: var(--background-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-subtle);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #444;
+        }
+
+        .footer-section {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding-top: 50px;
+        }
+
+        .social-icons a {
+            color: var(--text-light);
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+
+        /* MEDIA QUERIES (Maintained responsiveness) */
+        @media (max-width: 992px) {
+            .booking-bar {
+                flex-wrap: wrap;
+                padding: 10px 10px 0;
+                gap: 10px;
+            }
+
+            .booking-input {
+                width: calc(50% - 10px);
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+            }
+
+            .booking-input:nth-child(even) {
+                border-right: none;
+            }
+
+            .booking-input:nth-child(3) {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .booking-bar {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .booking-input {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding: 12px 0;
+            }
+
+            .booking-input:last-of-type {
+                border-bottom: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">CarWash</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <header class="hero-section">
+        <div class="header-nav">
+            <h1 class="logo">HydroClean</h1>
+            <nav class="main-nav">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <h1 class="display-5 fw-bold">A car wash. Delivered to your door</h1>
-      <p class="lead">Book a car wash with the most trusted doorstep specialists.</p>
+        <div class="hero-content">
+            <h2 class="hero-heading">A car wash. **Delivered to your door**</h2>
+            <p class="hero-subtext">Book a car wash with the largest mobile car wash specialist</p>
 
-      <div class="booking-panel">
-        <div class="booking-card container">
-          <form id="bookingForm" class="row g-3 align-items-center">
-            <div class="col-md-5">
-              <label class="form-label small text-muted">Car Location</label>
-              <input id="location" name="location" type="text" class="form-control" placeholder="Enter address or area"
-                required>
+            <div class="booking-bar-container">
+                <form class="booking-bar" id="bookingForm">
+                    <div class="booking-input">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Location (e.g., ZIP code)" name="location" required>
+                    </div>
+                    <div class="booking-input">
+                        <i class="fas fa-calendar-alt"></i>
+                        <select name="date" id="dateSelect" required>
+                            <option value="">Select Date</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="18:00">6:00 PM</option>
+
+                        </select>
+                    </div>
+                    <div class="booking-input">
+                        <i class="fas fa-clock"></i>
+                        <select name="time" required>
+                            <option value="">Select Time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+                <button class="book-now-btn primary-btn" type="submit" form="bookingForm">BOOK YOUR WASH NOW</button>
+                <div id="form-message" role="alert"></div>
             </div>
-
-            <div class="col-md-3">
-              <label class="form-label small text-muted">Select Date</label>
-              <input id="date" name="date" type="date" class="form-control" required>
-            </div>
-
-            <div class="col-md-2">
-              <label class="form-label small text-muted">Select Time</label>
-              <input id="time" name="time" type="time" class="form-control" required>
-            </div>
-
-            <div class="col-md-2 d-grid">
-              <button id="submitBtn" class="btn btn-primary mt-2" type="submit">Book Now</button>
-            </div>
-          </form>
-
-          <div class="text-center">
-            <span class="floating-bubble">4.6 ★</span>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- SERVICES -->
-  <section id="services" class="py-5">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">Our Services</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="p-4 bg-white service-card">
-            <h5>Basic Wash</h5>
-            <p>Exterior + foam + tyre</p><strong>₹299</strong>
-          </div>
+    <main>
+    </main>
+
+    <footer id="contact" class="footer-section">
+        <div class="copyright">
+            &copy; 2025 HydroClean. All rights reserved.
         </div>
-        <div class="col-md-4">
-          <div class="p-4 bg-white service-card">
-            <h5>Deluxe Wash</h5>
-            <p>Interior + exterior</p><strong>₹499</strong>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-4 bg-white service-card">
-            <h5>Premium Detailing</h5>
-            <p>Complete detailing</p><strong>₹999</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- ABOUT -->
-  <section id="about" class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">Why Choose Us?</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <h5>Convenient</h5>
-          <p>We come to you — no waiting.</p>
-        </div>
-        <div class="col-md-4">
-          <h5>Professional</h5>
-          <p>Trained staff & premium products.</p>
-        </div>
-        <div class="col-md-4">
-          <h5>Affordable</h5>
-          <p>Low price, great quality.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <script>
+        
+        // *** 1. Dynamic Date Population ***
+            document.addEventListener('DOMContentLoaded', function () {
+            const dateSelect = document.getElementById('dateSelect');
+            const today = new Date();
+            const DAYS_TO_SHOW = 7;
 
-  <!-- CONTACT -->
-  <section id="contact" class="py-5">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">Contact Us</h2>
-      <p>Email: support@carwash.com | Phone: +91 98765 43210</p>
-    </div>
-  </section>
+            // Format date as YYYY-MM-DD for backend submission
+            const formatDate = (date) => {
+                const d = new Date(date);
+            let month = '' + (d.getMonth() + 1);
+            let day = '' + d.getDate();
+            const year = d.getFullYear();
 
-  <!-- FOOTER -->
-  <footer class="py-4 text-center" style="background:#0b1a2e;color:#fff">
-    <div class="container">© 2025 CarWash — All Rights Reserved</div>
-  </footer>
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            return [year, month, day].join('-');
+            }
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            // Populate dropdown with the next 7 days
+            for (let i = 0; i < DAYS_TO_SHOW; i++) {
+                const nextDay = new Date(today);
+            nextDay.setDate(today.getDate() + i);
 
-  <!-- App JS -->
-  <script>
-    /*
-      Frontend behavior:
-      - On submit, send booking to backend (POST /api/book)
-      - Backend will save the booking and return a prefilled WhatsApp link
-      - Frontend opens WhatsApp (new tab) so user can send message to your number
-    */
+            const option = document.createElement('option');
+            const displayDate = nextDay.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric' });
 
-    const API_BASE = 'http://localhost:4000'; // <-- change to your deployed backend URL when live
+            option.value = formatDate(nextDay);
+            option.textContent = (i === 0) ? displayDate + " (Today)" : displayDate;
 
-    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.innerText = 'Sending...';
+            dateSelect.appendChild(option);
+            }
 
-      const payload = {
-        location: document.getElementById('location').value.trim(),
-        date: document.getElementById('date').value,
-        time: document.getElementById('time').value
-      };
+            // *** 2. Form Submission Handler ***
+            const form = document.getElementById('bookingForm');
+            const messageBox = document.getElementById('form-message');
 
-      try {
-        // Basic client-side validation
-        if (!payload.location || !payload.date || !payload.time) {
-          alert('Please fill all fields.');
-          btn.disabled = false;
-          btn.innerText = 'Book Now';
-          return;
-        }
+            // 🛑 CRITICAL STEP: REPLACE THIS URL after deploying the Apps Script 🛑
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwP060Dfp5y0lZKA_n9LfZgORti7VzJNYSnzW4vB81DAKuoOaDVyH109_N4tywyqym6/exec';
 
-        const res = await fetch(API_BASE + '/api/book', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+            // 1. Prepare data for submission
+            const formData = new FormData(form);
+            const data = { };
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+                }
+
+            // 2. Display loading/submitting message
+            messageBox.className = 'success'; // Reset class and show success style for loading
+            messageBox.textContent = 'Booking in progress...';
+            messageBox.style.opacity = '1';
+
+            // 3. Send data using Fetch API
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+            mode: 'no-cors', // Essential for cross-origin form submission to Apps Script
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+            // Convert data object into URL-encoded string for Google Script
+            body: new URLSearchParams(data).toString() 
+                })
+                .then(response => {
+                // With 'no-cors', we cannot read the response body, so we optimistically assume success.
+                // The Apps Script is reliable if deployed correctly.
+                form.reset();
+            messageBox.className = 'success';
+            messageBox.textContent = '✅ Booking Confirmed! We will contact you soon.';
+                })
+                .catch(error => {
+                console.error('Submission Error:', error);
+            messageBox.className = 'error';
+            messageBox.textContent = '❌ An error occurred during booking. Please try again.';
+                })
+                .finally(() => {
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageBox.style.opacity = '0';
+                }, 5000);
+                });
+            });
         });
 
-        if (!res.ok) throw new Error('Server error');
+    </script>
 
-        const data = await res.json();
-        // server returns: { success:true, whatsapp_url: "https://wa.me/..." }
-
-        if (data.whatsapp_url) {
-          // open WhatsApp prefilled link in new tab
-          window.open(data.whatsapp_url, '_blank');
-        } else {
-          alert('Booking received. We will contact you shortly.');
-        }
-
-        // Optional: clear form
-        document.getElementById('bookingForm').reset();
-      } catch (err) {
-        console.error(err);
-        alert('Failed to submit booking. Try again later.');
-      } finally {
-        btn.disabled = false;
-        btn.innerText = 'Book Now';
-      }
-    });
-  </script>
 </body>
 
 </html>
